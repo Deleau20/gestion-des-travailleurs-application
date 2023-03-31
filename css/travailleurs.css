@@ -10,9 +10,11 @@
 }
 
 body{
-  background: url(../images/33905721_indomay184.jpg);
+  background: url("../images/33905721_indomay184.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  margin: 0px;
+  padding: 0px;
 }
 
 .wrapper{
@@ -556,13 +558,6 @@ a{
   text-decoration: underline;
 }
 
-body{
-  background: url(./33905721_indomay184.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: 0px;
-  padding: 0px;
-}
 
 
 
