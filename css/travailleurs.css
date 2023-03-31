@@ -9,6 +9,12 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+body{
+  background: url(../images/33905721_indomay184.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .wrapper{
   width: 100%;
   height: 100%;
