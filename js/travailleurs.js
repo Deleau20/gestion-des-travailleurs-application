@@ -54,4 +54,100 @@ document.addEventListener("DOMContentLoaded", function() {
   
   })
 
+  //Fonction d'ajout et de suppression
+
+  function supprimerTravailleur(index) {
+    let travailleurs = JSON.parse(localStorage.getItem("ajoutEmploye"));
+  
+    travailleurs.splice(index, 1);
+  
+    localStorage.setItem("ajoutEmploye", JSON.stringify(travailleurs));
+  }
+  
+  function modifierTravailleur(index, nom, datenaissance, contact, email) {
+    let travailleurs = JSON.parse(localStorage.getItem("ajoutEmploye"));
+  
+    travailleurs[index].nom = nom;
+    travailleurs[index].datenaissance = datenaissance;
+    travailleurs[index].tel = contact;
+    travailleurs[index].adresseemail = email;
+  
+    localStorage.setItem("ajoutEmploye", JSON.stringify(travailleurs));
+  }
+
+  // Fonctions de gestion des travailleurs
+  function supprimerTravailleur(index) {
+    let travailleurs = JSON.parse(localStorage.getItem("ajoutEmploye"));
+
+    travailleurs.splice(index, 1);
+
+    localStorage.setItem("ajoutEmploye", JSON.stringify(travailleurs));
+
+    // Actualise la liste des travailleurs affichée sur la page
+    afficherTravailleurs();
+  }
+
+  function modifierTravailleur(index, nom, datenaissance, contact, email) {
+    let travailleurs = JSON.parse(localStorage.getItem("ajoutEmploye"));
+
+    travailleurs[index].nom = nom;
+    travailleurs[index].datenaissance = datenaissance;
+    travailleurs[index].tel = contact;
+    travailleurs[index].adresseemail = email;
+
+    localStorage.setItem("ajoutEmploye", JSON.stringify(travailleurs));
+
+    // Actualise la liste des travailleurs affichée sur la page
+    afficherTravailleurs();
+  }
+
+  // Fonction pour afficher la liste des travailleurs
+  function afficherTravailleurs() {
+    let travailleurs = JSON.parse(localStorage.getItem("ajoutEmploye"));
+
+    let listeTravailleurs = document.getElementById("liste-travailleurs");
+
+    // Supprime tous les éléments de la liste des travailleurs
+    while (listeTravailleurs.firstChild) {
+      listeTravailleurs.removeChild(listeTravailleurs.firstChild);
+    }
+
+    // Ajoute chaque travailleur à la liste des travailleurs
+    travailleurs.forEach((travailleur, index) => {
+      let li = document.createElement("li");
+
+      // Ajoute les informations du travailleur à la balise li
+      li.textContent = `Nom: ${travailleur.nom}, Date de naissance: ${travailleur.datenaissance}, Contact: ${travailleur.tel}, Email: ${travailleur.adresseemail}`;
+
+      // Ajoute des boutons pour modifier et supprimer le travailleur
+      let btnModifier = document.createElement("button");
+      btnModifier.textContent = "Modifier";
+      btnModifier.addEventListener("click", () => {
+        // Ouvre un formulaire pour modifier les informations du travailleur
+        let nouveauNom = prompt("Entrez le nouveau nom:");
+        let nouvelleDate = prompt("Entrez la nouvelle date de naissance:");
+        let nouveauContact = prompt("Entrez le nouveau contact:");
+        let nouvelleAdresse = prompt("Entrez la nouvelle adresse email:");
+
+        modifierTravailleur(index, nouveauNom, nouvelleDate, nouveauContact, nouvelleAdresse);
+      });
+
+      let btnSupprimer = document.createElement("button");
+      btnSupprimer.textContent = "Supprimer";
+      btnSupprimer.addEventListener("click", () => {
+        // Supprime le travailleur correspondant
+        supprimerTravailleur(index);
+      });
+
+      // Ajoute les boutons à la balise li
+      li.appendChild(btnModifier);
+      li.appendChild(btnSupprimer);
+
+      // Ajoute la balise li à la liste des travailleurs
+      listeTravailleurs.appendChild(li);
+    });
+  }
+
+  
+
 
